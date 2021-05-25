@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AC3- Wesley Paternezi</title>
+</head>
+
+<body>
+    <h1>Caça niquel</h1>
+    <select id="sel_niquel">
+        <option value="0">Melancia</option>
+        <option value="1">Banana</option>
+        <option value="2">Cereja</option>
+        <option value="3">Laranja</option>
+    </select>
+    <button onclick="pagar()">Pagar R$2,00 e Sortear</button>
+
+    <div id="msg1"></div> <br>
+    <span id="result1"></span>
+    <span id="result2"></span>
+    <span id="result3"></span>
+    <span id="result4"></span>
+    <span id="span_aviso"></span>
+
+
+    <h3>Gostaria de terminar?</h3>
+    <button onclick="encerrar()">Encerrar Noitada</button>
+    <div id="msg2"></div> <br>
+    <div id="msg_caixa"></div> <br>
+
+    <h3>Detalhes da Noitada</h3>
+    <div id="msg_detalhe"></div>
+</body>
+
+</html>
+<script>
+    var array_rodadas = [];
+    var array_frutas = [];
+    var array_sorteio1 = [];
+    var array_sorteio2 = [];
+    var array_sorteio3 = [];
+    var array_sorteio4 = [];
+    var array_wallet = [];
+    var array_lucro = [];
+    var num_rodadas = 0;
+    var wallet = 0;
+    var rodadas = 0;
+    var total_gasto = 0;
+    var total_ganho = 0;
+    var aviso = 0;
+
+    function pagar() {
+        var niquel = Number(sel_niquel.value);
+        var sorteio_frutas1 = parseInt(Math.random() * 4);
+        var sorteio_frutas2 = parseInt(Math.random() * 4);
+        var sorteio_frutas3 = parseInt(Math.random() * 4);
+        var sorteio_frutas4 = parseInt(Math.random() * 4);
+        var contador = 0;
+        total_gasto += 2;
+        aviso = 0;
+        array_rodadas.push(num_rodadas += 1);
+        array_frutas.push(niquel)
+        array_sorteio1.push(sorteio_frutas1);
+        array_sorteio2.push(sorteio_frutas2);
+        array_sorteio3.push(sorteio_frutas3);
+        array_sorteio4.push(sorteio_frutas4);
+
+        //rotadadas
+        if (niquel <= 4) {
+            wallet -= 2
+            rodadas++
+        }
+        if (niquel == sorteio_frutas1) {
+            contador++
+        }
+        if (niquel == sorteio_frutas2) {
+            contador++
+        }
+        if (niquel == sorteio_frutas3) {
+            contador++
+        }
+        if (niquel == sorteio_frutas4) {
+            contador++
+        }
+        if (contador == 1) {
+            console.log(`+1`);
+            wallet += 1.50;
+            total_ganho += 1.50;
+            contador = 0;
+            aviso = 1.50
+            array_lucro.push(aviso);
+            span_aviso.innerHTML = `<b> Nesta rodada você ganhou R$${aviso}`
+        }
+        else if (contador == 2) {
+            console.log(`+2`);
+            wallet += 5;
+            total_ganho += 5;
+            contador = 0;
+            aviso = 5
+            span_aviso.innerHTML = `<b> Nesta rodada você ganhou R$${aviso}`
+            array_lucro.push(aviso);
+        }
+        else if (contador == 3) {
+            console.log(`+3`);
+            wallet += 21;
+            total_ganho += 21;
+            contador = 0;
+            aviso = 21
+            span_aviso.innerHTML = `<b> Nesta rodada você ganhou R$${aviso}`
+            array_lucro.push(aviso);
+        }
+        else if (contador == 4) {
+            console.log(`+4`);
+            wallet += 50;
+            total_ganho += 50;
+            contador = 0;
+            aviso = 50
+            span_aviso.innerHTML = `<b> Nesta rodada você ganhou R$${aviso}`
+            array_lucro.push(aviso);
+        }
+        else if(contador == 0){
+            console.log(`zero`)
+            span_aviso.innerHTML = `<b> GO AGAIN! </b>`
+            aviso = 0;
+            array_lucro.push(aviso);
+        }
+
+
+        // 1/4 sorteio
+        if (sorteio_frutas1 == 0) {
+            result1.innerHTML = `<img style="width: 100px;" src="melancia.jpg" alt="melancia">`;
+        }
+        else if (sorteio_frutas1 == 1) {
+            result1.innerHTML = `<img style="width: 100px;" src="banana.jpg" alt="banana">`;
+        }
+        else if (sorteio_frutas1 == 2) {
+            result1.innerHTML = `<img style="width: 100px;" src="cereja.jpg" alt="cereja">`;
+        }
+        else if (sorteio_frutas1 == 3) {
+            result1.innerHTML = `<img style="width: 100px;" src="laranja.jpg" alt="laranja">`;
+        }
+
+        // 2/4 sorteio
+        if (sorteio_frutas2 == 0) {
+            result2.innerHTML = `<img style="width: 100px;" src="melancia.jpg" alt="melancia">`;
+        }
+        else if (sorteio_frutas2 == 1) {
+            result2.innerHTML = `<img style="width: 100px;" src="banana.jpg" alt="banana">`;
+        }
+        else if (sorteio_frutas2 == 2) {
+            result2.innerHTML = `<img style="width: 100px;" src="cereja.jpg" alt="cereja">`;
+        }
+        else if (sorteio_frutas2 == 3) {
+            result2.innerHTML = `<img style="width: 100px;" src="laranja.jpg" alt="laranja">`;
+        }
+        // 3/4 sorteio
+        if (sorteio_frutas3 == 0) {
+            result3.innerHTML = `<img style="width: 100px;" src="melancia.jpg" alt="melancia">`;
+        }
+        else if (sorteio_frutas3 == 1) {
+            result3.innerHTML = `<img style="width: 100px;" src="banana.jpg" alt="banana">`;
+        }
+        else if (sorteio_frutas3 == 2) {
+            result3.innerHTML = `<img style="width: 100px;" src="cereja.jpg" alt="cereja">`;
+        }
+        else if (sorteio_frutas3 == 3) {
+            result3.innerHTML = `<img style="width: 100px;" src="laranja.jpg" alt="laranja">`;
+        }
+        // 3/4 sorteio
+        if (sorteio_frutas4 == 0) {
+            result4.innerHTML = `<img style="width: 100px;" src="melancia.jpg" alt="melancia">`;
+        }
+        else if (sorteio_frutas4 == 1) {
+            result4.innerHTML = `<img style="width: 100px;" src="banana.jpg" alt="banana">`;
+        }
+        else if (sorteio_frutas4 == 2) {
+            result4.innerHTML = `<img style="width: 100px;" src="cereja.jpg" alt="cereja">`;
+        }
+        else if (sorteio_frutas4 == 3) {
+            result4.innerHTML = `<img style="width: 100px;" src="laranja.jpg" alt="laranja">`;
+        }
+        // Checar saldo e partidas 
+        msg1.innerHTML = ` 
+        saldo atual : $${wallet} <br>
+        Partidas jogas ${rodadas} <br>`;
+
+    }
+    function encerrar() {
+        msg_detalhe.innerHTML = ``;
+        msg2.innerHTML = `
+        RESUMO DA NOITADA: <br>
+        Quantidade de rodadas: ${rodadas} <br>
+        Saldo Atual : $${wallet} <br>
+        Total Ganho : $${total_ganho} <br>
+        Total Gasto : $${total_gasto}
+        `;
+
+        if (wallet > 0) {
+            msg_caixa.innerHTML = `Va ao caixa e receba R$${wallet}`
+        }
+        else if (wallet < 0) {
+            msg_caixa.innerHTML = `Va ao caixa e pague R$${wallet}`
+        } else {
+            msg_caixa.innerHTML = `Incrivel... Voce nem ganhou nem perdeu!!!!`
+        }
+        //  detalhar 
+        for (i = 0; i < array_rodadas.length; i++) {
+            msg_detalhe.innerHTML += `Na Rodada ${array_rodadas[i]}
+            a fruta escolhida foi ${array_frutas[i]} e a frutas sorteadas foram: ${array_sorteio1[i]},${array_sorteio2[i]}, ${array_sorteio3[i]}, ${array_sorteio4[i]} e vc ganhou nessa rodada ${array_lucro[i]}<br>`
+ // saving point, BATERIA DO NOTE VAI ACABAR 
+        }
+    }
+</script>
